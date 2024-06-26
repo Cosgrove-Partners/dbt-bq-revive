@@ -1,4 +1,4 @@
-# MWR dbt Project
+# Revive dbt Project
 
 ## Repository Purpose
 
@@ -11,8 +11,8 @@ To use the Python code from this repository, follow the steps below:
 1. Clone this repository to your local environment:
 
     ```bash
-      git clone https://github.com/Cosgrove-Partners/dbt-bq-mwr.git
-      cd dbt-bq-mwr
+      git clone https://github.com/Cosgrove-Partners/dbt-bq-revive.git
+      cd dbt-bq-revive
     ```
 
 2. Create a virtual environment (recommended):
