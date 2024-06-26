@@ -1,0 +1,45 @@
+name: schedule_dbt_job
+
+on:
+  workflow_dispatch:
+  schedule:
+    # https://crontab.guru <-- for generating CRON expression
+    - cron: "*/20 * * * *"
+
+env:
+  DBT_PROFILES_DIR: ${{ secrets.DBT_PROFILES_DIR }}
+  DBT_TARGET: ${{ secrets.DBT_TARGET }}
+  DBT_GCP_PROJECT: ${{ secrets.DBT_GCP_PROJECT }}
+  DBT_GCP_DATASET: ${{ secrets.DBT_GCP_DATASET }}
+  DBT_GCP_LOCATION: ${{ secrets.DBT_GCP_LOCATION }}
+  DBT_CRED_TYPE: ${{ secrets.DBT_CRED_TYPE }}
+  DBT_CRED_PKID: ${{ secrets.DBT_CRED_PKID }}
+  DBT_CRED_CLID: ${{ secrets.DBT_CRED_CLID }}
+  DBT_CRED_CLEM: ${{ secrets.DBT_CRED_CLEM }}
+  DBT_CRED_PKEY: ${{ secrets.DBT_CRED_PKEY }}
+
+jobs:
+  schedule_dbt_job:
+    name: schedule_dbt_job
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out
+      uses: actions/checkout@master
+
+    - name: Set up Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.11.x"
+
+    - name: Install dependencies
+      run: |
+        pip install dbt-core dbt-bigquery
+        dbt deps
+
+    # dbt related commands here - run use --target prod/dev to run for specific environments
+    - name: Run dbt models
+      run: dbt run --target ${{ secrets.DBT_TARGET }}
+
+    - name: Test dbt models
+      run: dbt test --target ${{ secrets.DBT_TARGET }}

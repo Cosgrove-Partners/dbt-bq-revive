@@ -1,0 +1,40 @@
+version: 2
+
+sources:
+  - name: mail_exports
+    dataset: src_mail_exports
+    tables:
+      - name: fedex_kpi_mwr
+      - name: fedex_kpi_mwr_data_updates
+      - name: fedex_kpi_revive
+      - name: fedex_kpi_waterout
+      - name: fedex_kpi_waterout_data_updates
+  - name: google_sheets
+    dataset: src_google_sheets
+    tables:
+      - name: acquisition_comparison_kpi_other_mwr
+      - name: balance_sheet_ampg
+      - name: census_data_1tomplumber
+      - name: census_data_ampg
+      - name: census_data_revive
+      - name: fedex_kpi_full_mwr
+      - name: fedex_kpi_mwr
+      - name: fedex_kpi_revive
+      - name: financial_by_customer_ampg
+      - name: financial_by_product_ampg
+      - name: monthly_kpi_magna_mwr
+      - name: monthly_kpi_mwr_mwr
+      - name: monthly_kpi_water_mwr
+      - name: profit_loss_ampg
+      - name: route_density_mwr
+      - name: water_jobs
+      - name: waterjobs_data
+      - name: weather_data
+      - name: weather_forecast_data
+      - name: weekly_kpi_magna_mwr
+      - name: weekly_kpi_mwr_mwr
+      - name: weekly_kpi_water_mwr
+  - name: src_pixis
+    dataset: src_pixis
+    tables:
+      - name: fedex_kpi_pixis        

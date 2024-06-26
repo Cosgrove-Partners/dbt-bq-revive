@@ -1,0 +1,70 @@
+models:
+  - name: fedex_kpi
+    columns:
+      - name: job_number
+        data_tests:
+          - not_null
+
+  - name: fedex_kpi_aggm
+    columns:
+      - name: source
+        data_tests:
+          - not_null
+      - name: forecast_mode
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ["Best Month","Trailing 3 Months","Last Month"]
+    data_tests:
+      - unique:
+          column_name: "source || '-' || forecast_mode || '-' || week_date"
+
+  - name: fedex_kpi_aggm_hist
+    columns:
+      - name: source
+        data_tests:
+          - not_null
+      - name: forecast_mode
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ["Best Month","Trailing 3 Months","Last Month"]
+    data_tests:
+      - unique:
+          column_name: "source || '-' || forecast_mode || '-' || day_forecast"
+
+  - name: fedex_oper_kpi
+    data_tests:
+      - unique:
+          column_name: "month_date || '-' || division || '-' || bad_lead"
+    columns:
+      - name: month_date
+        data_tests:
+          - not_null
+      - name: division
+        data_tests:
+          - not_null
+      - name: bad_lead
+        data_tests:
+          - not_null
+
+  - name: fedex_oper_detail_kpi
+    data_tests:
+      - unique:
+          column_name: "division || '-' || job_number"
+    columns:
+      - name: division
+        data_tests:
+          - not_null
+      - name: job_number
+        data_tests:
+          - not_null
+  
+  - name: lead_kpi
+    columns:
+      - name: job_number
+        data_tests:
+          - not_null
+      - name: branch
+        data_tests:
+          - not_null

@@ -1,0 +1,49 @@
+default:
+  outputs:
+    dev:
+      dataset: "{{ env_var('DBT_GCP_DATASET') }}"
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      location: "{{ env_var('DBT_GCP_LOCATION') }}"
+      method: service-account-json
+      priority: interactive
+      project: "{{ env_var('DBT_GCP_PROJECT') }}"
+      threads: 6
+      type: bigquery
+
+      keyfile_json:
+        type: "{{ env_var('DBT_CRED_TYPE') }}"
+        project_id: "{{ env_var('DBT_GCP_PROJECT') }}"
+        private_key_id: "{{ env_var('DBT_CRED_PKID') }}"
+        private_key: "{{ env_var('DBT_CRED_PKEY') }}"
+        client_email: "{{ env_var('DBT_CRED_CLEM') }}"
+        client_id: "{{ env_var('DBT_CRED_CLID') }}"
+        auth_uri: "https://accounts.google.com/o/oauth2/auth"
+        token_uri: "https://oauth2.googleapis.com/token"
+        auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs"
+        client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/tableau%40data-warehouse-393918.iam.gserviceaccount.com"
+        universe_domain: "googleapis.com"
+    prod:
+      dataset: "{{ env_var('DBT_GCP_DATASET') }}"
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      location: "{{ env_var('DBT_GCP_LOCATION') }}"
+      method: service-account-json
+      priority: interactive
+      project: "{{ env_var('DBT_GCP_PROJECT') }}"
+      threads: 6
+      type: bigquery
+
+      keyfile_json:
+        type: "{{ env_var('DBT_CRED_TYPE') }}"
+        project_id: "{{ env_var('DBT_GCP_PROJECT') }}"
+        private_key_id: "{{ env_var('DBT_CRED_PKID') }}"
+        private_key: "{{ env_var('DBT_CRED_PKEY') }}"
+        client_email: "{{ env_var('DBT_CRED_CLEM') }}"
+        client_id: "{{ env_var('DBT_CRED_CLID') }}"
+        auth_uri: "https://accounts.google.com/o/oauth2/auth"
+        token_uri: "https://oauth2.googleapis.com/token"
+        auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs"
+        client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/tableau%40data-warehouse-393918.iam.gserviceaccount.com"
+        universe_domain: "googleapis.com"
+  target: "{{ env_var('DBT_TARGET', 'dev') }}"
